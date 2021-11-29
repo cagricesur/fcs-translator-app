@@ -62,20 +62,29 @@ const Home: React.FunctionComponent = () => {
 
   const translate = useCallback(
     (text: string) => {
-      const request: ITranslationRequest = {
-        fromLang: "en",
-        toLang: "tr",
-        date: new Date(),
-        text,
-      };
-      TranslationService.Translate(request)
-        .then((response) => {
-          setTextTR(response.translation);
-          addToHistory(request, response);
-        })
-        .catch((reason) => {});
+      const cached = state.history.find((history) => {
+        return history.request.text === text;
+      });
+      if (cached) {
+        setTextTR(cached.response.translation);
+      } else {
+        const request: ITranslationRequest = {
+          fromLang: "en",
+          toLang: "tr",
+          date: new Date(),
+          text,
+        };
+        TranslationService.Translate(request)
+          .then((response) => {
+            setTextTR(response.translation);
+            addToHistory(request, response);
+          })
+          .catch((reason) => {
+            console.error(reason);
+          });
+      }
     },
-    [addToHistory]
+    [addToHistory, state.history]
   );
 
   const clearTimer = () => {
