@@ -3,7 +3,7 @@ import {
   CloseOutlined,
   HistoryOutlined,
 } from "@ant-design/icons";
-import { Button, Col, ColProps, message, notification, Row } from "antd";
+import { Button, Col, ColProps, notification, Row } from "antd";
 import React, { useCallback, useEffect, useRef } from "react";
 import {
   Drawer,
