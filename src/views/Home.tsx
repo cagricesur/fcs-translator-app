@@ -80,7 +80,7 @@ const Home: React.FunctionComponent = () => {
             addToHistory(request, response);
           })
           .catch((reason) => {
-            console.error(reason);
+            setTextTR(JSON.stringify(reason));
           });
       }
     },
