@@ -3,7 +3,7 @@ import {
   CloseOutlined,
   HistoryOutlined,
 } from "@ant-design/icons";
-import { Button, Col, ColProps, Row } from "antd";
+import { Button, Col, ColProps, message, notification, Row } from "antd";
 import React, { useCallback, useEffect, useRef } from "react";
 import {
   Drawer,
@@ -81,7 +81,12 @@ const Home: React.FunctionComponent = () => {
           })
           .catch((reason) => {
             console.error(reason);
-            setTextTR(">> An error occured, please try again later.");
+            notification.error({
+              message: "Error",
+              description: "An error occured, please try again later.",
+              duration: 3,
+              top: 70,
+            });
           });
       }
     },
